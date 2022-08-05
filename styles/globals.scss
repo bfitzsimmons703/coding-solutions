@@ -1,0 +1,34 @@
+// https://css-tricks.com/old-timey-terminal-styling/
+body {
+	background-color: black;
+	background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
+	height: 100vh;
+	margin: 0;
+	padding: 2rem;
+	box-sizing: border-box;
+	color: white;
+	font: 1.3rem Inconsolata, monospace;
+	text-shadow: 0 0 5px #c8c8c8;
+}
+::selection {
+	background: #0080ff;
+	text-shadow: none;
+}
+pre {
+	margin: 0;
+}
+
+hr {
+	margin: 1em 0;
+}
+
+main {
+	padding-bottom: 1em;
+}
+
+.solution-links {
+	a,
+	a:visited {
+		color: #fff;
+	}
+}
