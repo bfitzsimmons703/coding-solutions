@@ -1,7 +1,7 @@
 import { SolutionCode, SolutionDescription } from '../components/';
 
-export default function ArrayChunks() {
-	const code = `export function memoize<T extends number | string>(fn: (x: T) => T) {
+export default function Fib() {
+	const code = `function memoize<T extends number | string>(fn: (x: T) => T) {
         let cache: Record<any, T> = {};
         return function func(this: typeof func, arg: T) {
             if (cache[arg]) return cache[arg];
