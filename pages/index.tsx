@@ -13,6 +13,9 @@ const solutionLinks = new Map([
 	['sentencecap', 'Sentence Capitalization'],
 	['steps', 'Printing Steps'],
 	['pyramid', 'Printing Pyramid'],
+	['vowels', 'Find the Vowels'],
+	['matrix', 'Spiral Matrix'],
+	['fib', 'Fibonacci'],
 ]);
 
 const Home: NextPage = () => {
