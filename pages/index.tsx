@@ -16,6 +16,8 @@ const solutionLinks = new Map([
 	['vowels', 'Find the Vowels'],
 	['matrix', 'Spiral Matrix'],
 	['fib', 'Fibonacci'],
+	['weave', 'Queue Weave'],
+	['qfroms', 'Queue From Stacks'],
 ]);
 
 const Home: NextPage = () => {
