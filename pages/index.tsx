@@ -18,6 +18,7 @@ const solutionLinks = new Map([
 	['fib', 'Fibonacci'],
 	['weave', 'Queue Weave'],
 	['qfroms', 'Queue From Stacks'],
+	['midpoint', 'LinkedList Midpoint'],
 ]);
 
 const Home: NextPage = () => {
