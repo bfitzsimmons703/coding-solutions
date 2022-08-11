@@ -19,6 +19,8 @@ const solutionLinks = new Map([
 	['weave', 'Queue Weave'],
 	['qfroms', 'Queue From Stacks'],
 	['midpoint', 'LinkedList Midpoint'],
+	['fromlast', 'LinkedList N From Last'],
+	['longestpalindrome', 'Longest Palindromatic Substring'],
 ]);
 
 const Home: NextPage = () => {

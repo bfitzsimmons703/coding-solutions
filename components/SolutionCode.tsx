@@ -1,3 +1,8 @@
+import dynamic from 'next/dynamic';
+const TextEditor = dynamic(import('./Editor'), {
+	ssr: false,
+});
+
 interface Props {
 	codeSnippet: string;
 }
@@ -7,7 +12,7 @@ export function SolutionCode({ codeSnippet }: Props) {
 		<div>
 			<hr />
 			<h4>Solution</h4>
-			<pre>{codeSnippet}</pre>
+			<TextEditor code={codeSnippet} />
 		</div>
 	);
 }
