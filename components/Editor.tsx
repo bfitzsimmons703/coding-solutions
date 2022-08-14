@@ -9,6 +9,7 @@ export default function Editor({ code }: { code: string }) {
 		<div style={{ width: '100%' }}>
 			<AceEditor
 				width='100%'
+				height='750px'
 				fontSize={14}
 				showPrintMargin={true}
 				showGutter={true}

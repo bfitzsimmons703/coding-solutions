@@ -1,3 +1,5 @@
+// Queue From Stacks
+
 // Implement a QueueFromStack datastructure using two stacks.
 // *Do not* create an array inside of the 'QueueFromStack' class.
 // QueueFromStack should implement the methods 'add', 'remove', and 'peek'.

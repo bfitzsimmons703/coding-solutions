@@ -1,3 +1,8 @@
+// Spiral Matrix
+
+// Write a function that accepts an integer N
+// and returns a NxN spiral matrix.
+
 export function matrix(n: number): number[][] {
 	//set up the matrix body
 	let matrix: number[][] = [];

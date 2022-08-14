@@ -1,3 +1,9 @@
+// Tree Level Widths
+
+// Given the root node of a tree, return
+// an array where each element is the width
+// of the tree at each level.
+
 import { TreeNode } from '../lib/TreeNode';
 
 export function treeLevelWidth(root: TreeNode<number>): number[] {
@@ -14,7 +20,7 @@ export function treeLevelWidth(root: TreeNode<number>): number[] {
 				nextLevel.push(...node.children);
 			}
 
-			levels.push(level);
+			levels.push(nextLevel);
 		}
 	}
 	return widths;

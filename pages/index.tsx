@@ -1,29 +1,46 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
+import path from 'path';
+import fs, { readFileSync } from 'fs';
+import CodingSolution from '../lib/CodingSolution';
 import Link from 'next/link';
 
-const solutionLinks = new Map([
-	['fizzbuzz', 'Classic FizzBuzz'],
-	['reversestring', 'Reverse String'],
-	['reverseint', 'Reverse Integer'],
-	['anagrams', 'Anagrams'],
-	['palindrome', 'Palindrome'],
-	['maxchar', 'Max Character'],
-	['chunks', 'Array Chunks'],
-	['sentencecap', 'Sentence Capitalization'],
-	['steps', 'Printing Steps'],
-	['pyramid', 'Printing Pyramid'],
-	['vowels', 'Find the Vowels'],
-	['matrix', 'Spiral Matrix'],
-	['fib', 'Fibonacci'],
-	['weave', 'Queue Weave'],
-	['qfroms', 'Queue From Stacks'],
-	['midpoint', 'LinkedList Midpoint'],
-	['fromlast', 'LinkedList N From Last'],
-	['longestpalindrome', 'Longest Palindromatic Substring'],
-]);
+export async function getStaticProps() {
+	const dir = path.join(process.cwd(), '__tests__');
+	const filenames = fs.readdirSync(dir);
 
-const Home: NextPage = () => {
+	const promises = filenames.map(async (filename) => {
+		const link = filename.split('.')[0];
+		const filePath = path.join(dir, filename);
+		const fileContents = readFileSync(filePath, 'utf8');
+
+		const displayName = fileContents
+			.split('\n')
+			.shift()!
+			.replace('// ', '');
+
+		return {
+			link,
+			displayName,
+			code: '',
+		};
+	});
+
+	const solutions: CodingSolution[] = await Promise.all(promises);
+
+	const props: PageProps = {
+		solutions: solutions.filter((s) => s.displayName !== ''),
+	};
+
+	return {
+		props,
+	};
+}
+
+interface PageProps {
+	solutions: CodingSolution[];
+}
+
+const Home = (props: PageProps) => {
 	return (
 		<div>
 			<Head>
@@ -38,15 +55,20 @@ const Home: NextPage = () => {
 			<main>
 				<h3>TypeScript Coding Solutions</h3>
 				<ul className='solution-links'>
-					{Array.from(solutionLinks.entries()).map(
-						([link, title]) => (
-							<li key={link}>
-								<Link href={`/${link}`}>
-									<a>{title}</a>
-								</Link>
-							</li>
-						)
-					)}
+					{props.solutions
+						.filter((s) => !!s)
+						.map((solution: CodingSolution) => {
+							return (
+								<li
+									key={solution.link}
+									style={{ cursor: 'pointer' }}
+								>
+									<Link href={`/solutions/${solution.link}`}>
+										<a>{solution.displayName}</a>
+									</Link>
+								</li>
+							);
+						})}
 				</ul>
 			</main>
 		</div>
