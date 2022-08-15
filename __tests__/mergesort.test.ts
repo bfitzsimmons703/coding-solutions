@@ -6,10 +6,11 @@ function merge(left: number[], right: number[]): number[] {
 	const results: number[] = [];
 
 	while (left.length && right.length) {
-		const leftNum = left.shift()!;
-		const rightNum = right.shift()!;
-
-		results.push(Math.min(leftNum, rightNum));
+		if (left[0] < right[0]) {
+			results.push(left.shift()!);
+		} else {
+			results.push(right.shift()!);
+		}
 	}
 
 	// Push any remaining sorted numbers
