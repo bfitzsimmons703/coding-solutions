@@ -1,14 +1,6 @@
 // Binary Search Tree Left-Hand View
 
-class BSTNode<T> {
-	data: T;
-	left: BSTNode<T> | null = null;
-	right: BSTNode<T> | null = null;
-
-	constructor(data: T) {
-		this.data = data;
-	}
-}
+import { BSTNode } from '../lib/BinarySearchTree';
 
 export function bstLeftHandView(root: BSTNode<number>): number[] {
 	const levels: BSTNode<number>[][] = [[root]];

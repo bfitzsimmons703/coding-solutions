@@ -5,8 +5,7 @@
 // method of the linked list.  Assume that n will always
 // be less than the length of the list.
 
-import { LinkedList } from '../lib/LinkedList';
-import { Node } from '../lib/Node';
+import { LinkedList, Node } from '../lib/LinkedList';
 
 export function fromLast(l: LinkedList<string>, n: number): Node<string> {
 	let slow = l.getFirst()!;

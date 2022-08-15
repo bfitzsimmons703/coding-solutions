@@ -1,4 +1,12 @@
-import { Node } from './Node';
+export class Node<T> {
+	data: T;
+	next: Node<T> | null;
+
+	constructor(data: T, next: Node<T> | null = null) {
+		this.data = data;
+		this.next = next;
+	}
+}
 
 export class LinkedList<T> {
 	head: Node<T> | null = null;

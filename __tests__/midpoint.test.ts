@@ -7,8 +7,7 @@
 // the size of the list, and only iterate
 // through the list one time.
 
-import { LinkedList } from '../lib/LinkedList';
-import { Node } from '../lib/Node';
+import { LinkedList, Node } from '../lib/LinkedList';
 
 export function midpoint(l: LinkedList<string>): Node<string> | null {
 	let slow: Node<string> | null = l.getFirst();

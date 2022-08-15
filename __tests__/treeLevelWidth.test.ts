@@ -4,7 +4,7 @@
 // an array where each element is the width
 // of the tree at each level.
 
-import { TreeNode } from '../lib/TreeNode';
+import { TreeNode } from '../lib/Tree';
 
 export function treeLevelWidth(root: TreeNode<number>): number[] {
 	const widths: number[] = [];

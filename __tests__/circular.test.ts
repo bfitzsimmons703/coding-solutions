@@ -3,8 +3,7 @@
 // Given a linked list, return true if the list
 // is circular, false if it is not.
 
-import { LinkedList } from '../lib/LinkedList';
-import { Node } from '../lib/Node';
+import { LinkedList, Node } from '../lib/LinkedList';
 
 export function circular(list: LinkedList<string>): boolean {
 	let slow = list.getFirst();
