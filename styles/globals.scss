@@ -18,9 +18,18 @@ main {
 	padding-bottom: 1em;
 }
 
-.solution-links {
-	a,
-	a:visited {
-		color: #fff;
+.groups {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+
+	@media (max-width: 960px) {
+		grid-template-columns: 1fr;
+	}
+
+	.group-links {
+		a,
+		a:visited {
+			color: #fff;
+		}
 	}
 }

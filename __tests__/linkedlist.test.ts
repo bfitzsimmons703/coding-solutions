@@ -1,5 +1,5 @@
 // Linked List Implementation
-// Linked List
+// Linked Lists
 
 export class Node<T> {
 	data: T;

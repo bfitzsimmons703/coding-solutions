@@ -16,22 +16,21 @@ export async function getStaticProps() {
 
 	const solutions: CodingSolution[] = await Promise.all(promises);
 
-	const props: PageProps = {
-		solutions: solutions.filter(
-			(s) => s.displayName !== '' && s.groupName !== ''
-		),
-	};
+	const groups: Record<string, CodingSolution[]> = {};
+	for (const solution of solutions) {
+		groups[solution.groupName] = groups[solution.groupName] || [];
+		groups[solution.groupName].push(solution);
+	}
 
-	return {
-		props,
-	};
+	const props: PageProps = { groups };
+	return { props };
 }
 
 interface PageProps {
-	solutions: CodingSolution[];
+	groups: Record<string, CodingSolution[]>;
 }
 
-const Home = (props: PageProps) => {
+const Home = ({ groups }: PageProps) => {
 	return (
 		<div>
 			<Head>
@@ -45,22 +44,41 @@ const Home = (props: PageProps) => {
 
 			<main>
 				<h3>TypeScript Coding Solutions</h3>
-				<ul className='solution-links'>
-					{props.solutions
-						.filter((s) => !!s)
-						.map((solution: CodingSolution) => {
+				<div className='groups'>
+					{Object.keys(groups)
+						.sort()
+						.map((groupName: string) => {
 							return (
-								<li
-									key={solution.link}
-									style={{ cursor: 'pointer' }}
-								>
-									<Link href={`/solutions/${solution.link}`}>
-										<a>{solution.displayName}</a>
-									</Link>
-								</li>
+								<div className='group' key={groupName}>
+									<h4>{groupName}</h4>
+									<ul className='group-links'>
+										{groups[groupName].map(
+											(solution: CodingSolution) => {
+												return (
+													<li
+														key={solution.link}
+														style={{
+															cursor: 'pointer',
+														}}
+													>
+														<Link
+															href={`/solutions/${solution.link}`}
+														>
+															<a>
+																{
+																	solution.displayName
+																}
+															</a>
+														</Link>
+													</li>
+												);
+											}
+										)}
+									</ul>
+								</div>
 							);
 						})}
-				</ul>
+				</div>
 			</main>
 		</div>
 	);
