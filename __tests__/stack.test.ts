@@ -1,4 +1,5 @@
 // Stack Implementation
+// Stacks
 
 // Create a stack data structure.  The stack
 // should be a class with methods 'push', 'pop', and

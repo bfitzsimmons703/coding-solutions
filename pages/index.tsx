@@ -1,34 +1,25 @@
 import Head from 'next/head';
 import path from 'path';
 import fs, { readFileSync } from 'fs';
-import CodingSolution from '../lib/CodingSolution';
+import CodingSolution, {
+	getCodingSolutionFromTestFile,
+} from '../lib/CodingSolution';
 import Link from 'next/link';
 
 export async function getStaticProps() {
 	const dir = path.join(process.cwd(), '__tests__');
 	const filenames = fs.readdirSync(dir);
 
-	const promises = filenames.map(async (filename) => {
-		const link = filename.split('.')[0];
-		const filePath = path.join(dir, filename);
-		const fileContents = readFileSync(filePath, 'utf8');
-
-		const displayName = fileContents
-			.split('\n')
-			.shift()!
-			.replace('// ', '');
-
-		return {
-			link,
-			displayName,
-			code: '',
-		};
-	});
+	const promises: Promise<CodingSolution>[] = filenames.map(
+		async (filename) => getCodingSolutionFromTestFile(filename, dir)
+	);
 
 	const solutions: CodingSolution[] = await Promise.all(promises);
 
 	const props: PageProps = {
-		solutions: solutions.filter((s) => s.displayName !== ''),
+		solutions: solutions.filter(
+			(s) => s.displayName !== '' && s.groupName !== ''
+		),
 	};
 
 	return {

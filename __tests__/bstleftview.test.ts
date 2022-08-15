@@ -1,4 +1,5 @@
 // Binary Search Tree Left-Hand View
+// Trees
 
 import { BSTNode } from '../lib/BinarySearchTree';
 

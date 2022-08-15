@@ -1,4 +1,5 @@
 // Sentence Capitalization
+// Strings
 
 // Write a function that accepts a string.  The function should
 // capitalize the first letter of each word in the string then

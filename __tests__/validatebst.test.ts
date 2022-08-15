@@ -1,4 +1,5 @@
 // Validate BST
+// Trees
 
 import { BSTNode } from '../lib/BinarySearchTree';
 

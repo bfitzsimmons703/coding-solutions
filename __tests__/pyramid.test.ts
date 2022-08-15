@@ -1,4 +1,5 @@
 // Print a Pyramid
+// Miscellaneous
 
 // @ts-nocheck
 

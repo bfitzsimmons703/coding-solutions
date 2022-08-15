@@ -1,4 +1,5 @@
 // Binary Search Tree
+// Trees
 
 // 1) Implement the Node class to create
 // a binary search tree.  The constructor

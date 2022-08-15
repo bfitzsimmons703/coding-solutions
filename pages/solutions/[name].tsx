@@ -2,7 +2,9 @@ import { readdirSync, readFileSync } from 'fs';
 import { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import path from 'path';
-import CodingSolution from '../../lib/CodingSolution';
+import CodingSolution, {
+	getCodingSolutionFromTestFile,
+} from '../../lib/CodingSolution';
 
 const Editor = dynamic(import('../../components/Editor'), {
 	ssr: false,
@@ -24,30 +26,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
 	const dir = path.join(process.cwd(), '__tests__');
-
-	const solutionName = context.params?.name as string;
-	const filename = `${solutionName}.test.ts`;
-	const filePath = path.join(dir, filename);
-	const fileContents = readFileSync(filePath, 'utf8');
-
-	const fileLines = fileContents.split('\n');
-	const displayName = fileLines[0].replace('// ', '');
-
-	const code = fileLines
-		.slice(2)
-		.filter(
-			(line) =>
-				line.indexOf('import') === -1 && line.indexOf('@ts') === -1
-		)
-		.join('\n');
+	const name = context.params?.name as string;
+	const filename = `${name}.test.ts`;
 
 	return {
 		props: {
-			solution: {
-				name: solutionName,
-				displayName: displayName,
-				code: code,
-			},
+			solution: getCodingSolutionFromTestFile(filename, dir),
 		},
 	};
 }
@@ -55,7 +39,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 export default function Solution({ solution }: { solution: CodingSolution }) {
 	return (
 		<main>
-			<h4>{solution.displayName}</h4>
+			<h4>
+				{solution.displayName} ({solution.groupName})
+			</h4>
 			<Editor code={solution.code} />
 		</main>
 	);
