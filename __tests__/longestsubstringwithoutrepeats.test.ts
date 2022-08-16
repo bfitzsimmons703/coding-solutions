@@ -5,6 +5,8 @@
 
 // https://leetcode.com/problems/longest-substring-without-repeating-characters/
 
+// O(n)
+
 export function lengthOfLongestSubstring(s: string): number {
 	if (!s.length) return 0;
 
