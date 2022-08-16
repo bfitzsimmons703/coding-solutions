@@ -16,7 +16,7 @@ export function threeSum(nums: number[]): number[][] {
 	}
 
 	const sums: number[][] = [];
-	nums.sort();
+	nums.sort((a, b) => a - b);
 	// [-1,0,1,2,-1,-4]
 	// [-4, -1, -1, 0, 1, 2]
 
