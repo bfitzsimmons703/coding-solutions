@@ -5,7 +5,7 @@
 
 // O(n)
 
-import { LinkedList, Node } from '../lib/LinkedList';
+import { Node } from '../lib/LinkedList';
 
 export function reverseList(head: Node<number> | null): Node<number> | null {
 	if (!head) return null;
