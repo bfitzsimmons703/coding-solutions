@@ -48,6 +48,8 @@ export function reorderList(head: Node<number> | null): Node<number> | null {
 		}
 		even = nextEven;
 	}
+
+	return head;
 }
 
 test('Reorder List', () => {
