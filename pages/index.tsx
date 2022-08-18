@@ -46,7 +46,7 @@ const Home = ({ groups }: PageProps) => {
 				<h3>TypeScript Coding Solutions</h3>
 				<div className='groups'>
 					{Object.keys(groups)
-						.sort((a, b) => groups[b].length - groups[a].length)
+						.sort((a, b) => groups[a].length - groups[b].length)
 						.map((groupName: string) => {
 							return (
 								<div className='group' key={groupName}>
