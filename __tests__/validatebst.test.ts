@@ -13,18 +13,10 @@ export function validate(
 	min: number | null = null,
 	max: number | null = null
 ): boolean {
-	if (!node) {
-		// We've reached the bottom of this recursive call, meaning every node before it was valid
-		return true;
-	}
+	if (!node) return true;
 
-	if (min !== null && node.data <= min) {
-		return false;
-	}
-
-	if (max !== null && node.data >= max) {
-		return false;
-	}
+	if (min !== null && node.data <= min) return false;
+	if (max !== null && node.data >= max) return false;
 
 	return (
 		validate(node.left, min, node.data) &&
