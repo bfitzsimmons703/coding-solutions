@@ -10,12 +10,14 @@
 export function search(nums: number[], target: number): number {
 	let [left, right] = [0, nums.length - 1];
 	while (left <= right) {
-		let mid = Math.ceil((left + right) / 2);
-		if (nums[mid] === target) return mid;
+		const mid = Math.ceil((left + right) / 2);
+		const midNum = nums[mid];
 
-		if (nums[mid] >= nums[left]) {
+		if (midNum === target) return mid;
+
+		if (midNum >= nums[left]) {
 			// in left sorted portion
-			if (target > nums[mid] || target < nums[left]) {
+			if (target > midNum || target < nums[left]) {
 				// search right
 				left = mid + 1;
 			} else {
@@ -23,7 +25,7 @@ export function search(nums: number[], target: number): number {
 			}
 		} else {
 			// in right sorted portion
-			if (target < nums[mid] || target > nums[right]) {
+			if (target < midNum || target > nums[right]) {
 				right = mid - 1;
 			} else {
 				left = mid + 1;

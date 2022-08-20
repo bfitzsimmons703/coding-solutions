@@ -26,4 +26,20 @@ export function permute(nums: number[]): number[][] {
 	return result;
 }
 
-console.log(permute([1, 2, 3]));
+test('Permutations', () => {
+	expect(permute([1, 2, 3])).toStrictEqual([
+		[3, 2, 1],
+		[2, 3, 1],
+		[1, 3, 2],
+		[3, 1, 2],
+		[2, 1, 3],
+		[1, 2, 3],
+	]);
+
+	expect(permute([0, 1])).toStrictEqual([
+		[1, 0],
+		[0, 1],
+	]);
+
+	expect(permute([1])).toStrictEqual([[1]]);
+});

@@ -40,7 +40,7 @@ export default function Solution({ solution }: { solution: CodingSolution }) {
 	return (
 		<main>
 			<h4>
-				{solution.displayName} ({solution.groupName})
+				Solutions / {solution.groupName} / {solution.displayName}
 			</h4>
 			<Editor code={solution.code} />
 		</main>
