@@ -1,44 +1,42 @@
 // Permutations
 // Miscellaneous
 
-export function permute(nums: number[]): number[][] {
-	const result = [];
+// Given an array of elements, return all permutations
 
-	// Base case
-	if (nums.length === 1) {
-		return [[...nums]];
-	}
+// O(n! * n)
 
-	for (let i = 0; i < nums.length; i++) {
-		let firstValue = nums[0];
-		nums = nums.slice(1);
+export function permute<T>(elements: T[]): T[][] {
+	// base case
+	if (!elements.length) return [elements];
 
-		let perms = permute(nums);
-		for (const perm of perms) {
-			perm.push(firstValue);
+	const permutations: T[][] = [];
+
+	const firstEl = elements[0];
+	const rest = elements.slice(1);
+	const subPerms = permute(rest);
+	for (const perm of subPerms) {
+		for (let i = 0; i <= perm.length; i++) {
+			const permWithFirst = [...perm.slice(0, i), firstEl, ...perm.slice(i)];
+			permutations.push(permWithFirst);
 		}
-
-		nums.push(firstValue);
-
-		result.push(...perms);
 	}
 
-	return result;
+	return permutations;
 }
 
 test('Permutations', () => {
 	expect(permute([1, 2, 3])).toStrictEqual([
-		[3, 2, 1],
+		[1, 2, 3],
+		[2, 1, 3],
 		[2, 3, 1],
 		[1, 3, 2],
 		[3, 1, 2],
-		[2, 1, 3],
-		[1, 2, 3],
+		[3, 2, 1],
 	]);
 
 	expect(permute([0, 1])).toStrictEqual([
-		[1, 0],
 		[0, 1],
+		[1, 0],
 	]);
 
 	expect(permute([1])).toStrictEqual([[1]]);
