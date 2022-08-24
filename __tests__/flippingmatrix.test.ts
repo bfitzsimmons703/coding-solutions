@@ -1,5 +1,5 @@
 // Flipping the Matrix
-// Arrays
+// Matrices
 
 // Sean invented a game involving a 2Nx2N matrix where each cell of the matrix contains an integer.
 // He can reverse any of its rows or columns any number of times.
