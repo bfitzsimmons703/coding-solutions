@@ -5,6 +5,8 @@
 // Consider the length as the number of edges in the path, not the number of nodes.
 // If there is no path between A and B, then return -1.
 
+// O(e) # of edges
+
 type Graph = Record<string, string[]>;
 type Pair = [string, number]; //[node, distance]
 
