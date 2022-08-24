@@ -16,12 +16,10 @@
 
 export class MinStack {
 	data: any[] = [];
-	min: number | undefined;
 	minHistory: number[] = [];
 
 	push(val: number): void {
-		if (!this.data.length || (this.min !== undefined && val <= this.min)) {
-			this.min = val;
+		if (!this.data.length || val <= this.getMin()) {
 			this.minHistory.push(val);
 		}
 
@@ -32,9 +30,8 @@ export class MinStack {
 		const top = this.data[this.data.length - 1];
 		this.data.pop();
 
-		if (top === this.minHistory[this.minHistory.length - 1]) {
+		if (top === this.getMin()) {
 			this.minHistory.pop();
-			this.min = this.minHistory[this.minHistory.length - 1];
 		}
 	}
 
@@ -43,7 +40,7 @@ export class MinStack {
 	}
 
 	getMin(): number {
-		return this.min!;
+		return this.minHistory[this.minHistory.length - 1];
 	}
 }
 
