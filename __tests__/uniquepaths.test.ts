@@ -6,11 +6,7 @@
 
 // O(n) with memoization
 
-export function uniquePaths(
-	m: number,
-	n: number,
-	memo: Record<string, number> = {}
-): number {
+export function uniquePaths(m: number, n: number, memo: Record<string, number> = {}): number {
 	const stringCoords = `${m},${n}`;
 	if (stringCoords in memo) return memo[stringCoords];
 
@@ -18,8 +14,7 @@ export function uniquePaths(
 
 	if (m === 1 || n === 1) return 1; //single cell
 
-	memo[stringCoords] =
-		uniquePaths(m - 1, n, memo) + uniquePaths(m, n - 1, memo);
+	memo[stringCoords] = uniquePaths(m - 1, n, memo) + uniquePaths(m, n - 1, memo);
 	return memo[stringCoords];
 }
 
