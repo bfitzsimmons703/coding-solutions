@@ -16,7 +16,7 @@ class TrieNode {
 }
 
 export class Trie {
-	root: TrieNode = new TrieNode();
+	private root: TrieNode = new TrieNode();
 
 	insert(word: string): void {
 		let current = this.root;
@@ -59,3 +59,13 @@ export class Trie {
 		return true;
 	}
 }
+
+test('Trie', () => {
+	const trie = new Trie();
+	trie.insert('apple');
+	trie.insert('app');
+
+	expect(trie.startsWith('ap')).toBeTruthy();
+	expect(trie.search('apple')).toBeTruthy();
+	expect(trie.startsWith('pa')).toBeFalsy();
+});
