@@ -33,6 +33,14 @@ export class MaxHeap {
 		[this.heap[index1], this.heap[index2]] = [this.heap[index2], this.heap[index1]];
 	}
 
+	getMax(): number {
+		return this.heap[0];
+	}
+
+	getSize(): number {
+		return this.heap.length;
+	}
+
 	insert(n: number): void {
 		this.heap.push(n);
 		if (this.heap.length > 1) {
