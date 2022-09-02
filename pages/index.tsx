@@ -1,20 +1,15 @@
 import Head from 'next/head';
 import path from 'path';
-import fs, { readFileSync } from 'fs';
-import CodingSolution, {
-	getCodingSolutionFromTestFile,
-} from '../lib/CodingSolution';
+import fs from 'fs';
+import CodingSolution, { getCodingSolutionFromTestFile } from '../lib/CodingSolution';
 import Link from 'next/link';
 
 export async function getStaticProps() {
 	const dir = path.join(process.cwd(), '__tests__');
 	const filenames = fs.readdirSync(dir);
 
-	const promises: Promise<CodingSolution>[] = filenames.map(
-		async (filename) => getCodingSolutionFromTestFile(filename, dir)
-	);
-
-	const solutions: CodingSolution[] = await Promise.all(promises);
+	const solutionPromises: Promise<CodingSolution>[] = filenames.map(async (filename) => getCodingSolutionFromTestFile({ filename, dir }));
+	const solutions: CodingSolution[] = await Promise.all(solutionPromises);
 
 	const groups: Record<string, CodingSolution[]> = {};
 	for (const solution of solutions) {
@@ -35,10 +30,7 @@ const Home = ({ groups }: PageProps) => {
 		<div>
 			<Head>
 				<title>TypeScript Coding Solutions</title>
-				<meta
-					name='description'
-					content='TypeScript solutions to various coding challenges'
-				/>
+				<meta name='description' content='TypeScript solutions to various coding challenges' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
@@ -52,28 +44,20 @@ const Home = ({ groups }: PageProps) => {
 								<div className='group' key={groupName}>
 									<h4>{groupName}</h4>
 									<ul className='group-links'>
-										{groups[groupName].map(
-											(solution: CodingSolution) => {
-												return (
-													<li
-														key={solution.link}
-														style={{
-															cursor: 'pointer',
-														}}
-													>
-														<Link
-															href={`/solutions/${solution.link}`}
-														>
-															<a>
-																{
-																	solution.displayName
-																}
-															</a>
-														</Link>
-													</li>
-												);
-											}
-										)}
+										{groups[groupName].map((solution: CodingSolution) => {
+											return (
+												<li
+													key={solution.link}
+													style={{
+														cursor: 'pointer',
+													}}
+												>
+													<Link href={`/solutions/${solution.link}`}>
+														<a>{solution.displayName}</a>
+													</Link>
+												</li>
+											);
+										})}
 									</ul>
 								</div>
 							);
