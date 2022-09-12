@@ -19,8 +19,8 @@ function wordBreakRecursive(s: string, wordDict: string[], memo: Record<string, 
 			const left = s.slice(0, indexOf);
 			const right = s.slice(indexOf + word.length);
 
-			memo[left] = wordBreak(left, wordDict, memo);
-			memo[right] = wordBreak(right, wordDict, memo);
+			memo[left] = wordBreakRecursive(left, wordDict, memo);
+			memo[right] = wordBreakRecursive(right, wordDict, memo);
 
 			if (memo[left] && memo[right]) {
 				return true;
