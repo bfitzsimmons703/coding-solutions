@@ -4,7 +4,7 @@
 // Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
 // Note that the same word in the dictionary may be reused multiple times in the segmentation.
 
-export function wordBreak(s: string, wordDict: string[], memo: Record<string, boolean> = {}): boolean {
+function wordBreakRecursive(s: string, wordDict: string[], memo: Record<string, boolean> = {}): boolean {
 	if (!s) {
 		return true;
 	}
@@ -29,6 +29,35 @@ export function wordBreak(s: string, wordDict: string[], memo: Record<string, bo
 	}
 
 	return false;
+}
+
+// Bottom up approach
+// O(n^2 * m)
+export function wordBreak(s: string, wordDict: string[]): boolean {
+	const dp = Array(s.length + 1).fill(false);
+	dp[s.length] = true;
+	for (let i = s.length - 1; i >= 0; i--) {
+		for (const word of wordDict) {
+			if (i + word.length <= s.length && s.slice(i, i + word.length) === word) {
+				// We have enough characters in the substring starting at `i` to compare it to `word`
+				// And the substring === word
+
+				/* 
+				Since we're working backwards, dp[i + word.length] has already been calculated
+				Ex: `leetcode`, [`leet`, `code`];
+				if i = 0, we know that i + `leet`.length = 4. Which means we have `code` left (starting at index 4)
+				We already calculated true for i = 4, since `code` is in the wordDict. Which tells us that 0 will be true too
+				*/
+				dp[i] = dp[i + word.length];
+
+				if (dp[i]) {
+					break;
+				}
+			}
+		}
+	}
+
+	return dp[0];
 }
 
 test('Word Break 1', () => {
